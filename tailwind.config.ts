@@ -11,7 +11,8 @@ const config: Config = {
       white: "#FFFFFF",
       "blue": {
         DEFAULT: "#5B0AE1",
-        "300": "#6B63C4"
+        "300": "#6B63C4",
+        "500":"#584FBD"
 
       },
       "gray": {
