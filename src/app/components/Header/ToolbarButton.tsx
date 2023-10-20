@@ -1,18 +1,16 @@
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
-import Image from 'next/image'
 import React from 'react'
 
-const ToolbarButton = ({ text, icon, altText }: {
+const ToolbarButton = ({ text, Icon, altText }: {
   text: string,
-  icon: StaticImport,
+  Icon: React.ReactNode,
   altText: string
 }) => {
   return (
-    <button className="rounded-md flex items-center gap-2 text-sm text-blue-300 border-2 border-blue-300 px-3 py-1.5">
+    <button className="rounded-md flex items-center gap-2 text-sm text-blue-300 border-[1px] border-blue-300 px-3 py-1.5">
       <div>
-        <Image alt={altText} src={icon} className="w-5 h-5"/>
+        {Icon}
       </div>
-      <span className="text-gray-800">{text}</span>
+      <span className="text-gray-800 hidden md:inline">{text}</span>
     </button>
   )
 }

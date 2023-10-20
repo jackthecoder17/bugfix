@@ -1,39 +1,19 @@
 "use client"
 import { useRouter } from "next/navigation"
 import EmptyListPlaceholder from "../components/EmptyListPlaceholder"
-import { useState } from "react"
 import Image from "next/image"
 import CheckGreen from "@/app/assets/icons/svg/check-green.svg"
 import CheckRed from "@/app/assets/icons/svg/check-red.svg"
 import NotFound from "@/app/assets/images/illustrations/page-not-found.svg"
-
-let sampleWarmups = [
-  {
-    _id: "wwlkwk",
-    no: "01",
-    name: "Neww1",
-    status: "draft",
-    day: 0,
-    spamEmail: 0,
-    sentEmail: 0
-  },
-  {
-    _id: "asdkfjasdf",
-    no: "02",
-    name: "warmup 2",
-    status: "Sent 15 Aug, 8:30PM",
-    day: 0,
-    spamEmail: 0,
-    sentEmail: 200
-  },
-]
-
+import { useAppSelector } from "../store/hooks"
+import { selectWarmups } from "../store/slices/warmupsSlice"
+import { routes } from "../constants"
 
 const WarmUp = () => {
-  const [warmups, setWarmups] = useState<typeof sampleWarmups>(sampleWarmups)
+  const warmups = useAppSelector(selectWarmups)
   const router = useRouter()
   function goToCreateWarmup(){
-    router.push("/warm-ups/new")
+    router.push(routes.NEW_WARM_UP)
   }
 
   if (!warmups || warmups.length === 0){
@@ -68,16 +48,21 @@ const WarmUp = () => {
             ):(
                 warmups.map(warmup => (
                   <div className="grid grid-cols-6 gap-3 text-gray-500 p-4 lg:px-8 border-b-[0.5px]">
-                    <div className="">{warmup.no}</div>
-                    <div>{warmup.name}</div>
+                    <div className="flex items-center">{warmup.no}</div>
+                    <div className="flex items-center">{warmup.name}</div>
                     <div className="flex items-center w-full gap-1.5">
                       <div className="w-4 h-4">
-                        <Image src={warmup.status === "draft" ? CheckRed:CheckGreen} alt="check mark" className="w-4 h-4"/>
+                        {
+                          warmup.status === "draft" ? (<CheckRed />) : (<CheckGreen  />)
+                        }
                       </div>
-                      {warmup.status}</div>
-                    <div className="flex justify-center">{warmup.day}</div>
-                    <div className="flex justify-center">{warmup.spamEmail}</div>
-                    <div className="flex justify-center">{warmup.sentEmail}</div>
+                      <p>
+                      {warmup.status}
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center">{warmup.day}</div>
+                    <div className="flex items-center justify-center">{warmup.spamEmail}</div>
+                    <div className="flex items-center justify-center">{warmup.sentEmail}</div>
                   </div>
                 ))
               )

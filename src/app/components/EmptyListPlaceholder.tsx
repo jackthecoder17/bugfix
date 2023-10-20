@@ -1,5 +1,3 @@
-"use client"
-import Image from 'next/image'
 import React from 'react'
 import { IconContext } from 'react-icons'
 import { BsCheckLg as Tick} from "react-icons/bs"
@@ -19,11 +17,11 @@ export default function EmptyListPlaceholder({ title, ctaLabel, ctaAction }: {
   ctaAction: () => void
 }) {
   return (
-    <section className="w-full h-full overflow-auto flex bg-gray-150">
-      <div className="w-full h-full flex flex-col items-center justify-center gap-5">
-        <div className="flex gap-5">
+    <section className="w-full h-full overflow-auto flex bg-gray-150 p-5">
+      <div className="w-full h-full flex flex-col items-center md:justify-center gap-5">
+        <div className="flex flex-col md:flex-row gap-5">
           <div>
-            <Image src={PersonOnSkate} alt="person-on-skate-illustration"/>
+            <PersonOnSkate />
           </div>
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl text-gray-800 font-medium">{title}</h2>

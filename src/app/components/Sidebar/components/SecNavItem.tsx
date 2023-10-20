@@ -1,20 +1,23 @@
+import { useAppSelector } from '@/app/store/hooks'
+import { selectIsSidebarOpen } from '@/app/store/slices/sidebarSlice'
 import React from 'react'
-import Image from "next/image"
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
+import { Tooltip } from 'react-tooltip'
 
-const SecNavItem = ({ icon, altText, text, count }: {
-  icon: StaticImport,
+const SecNavItem = ({ Icon, altText, text, count }: {
+  Icon: React.ReactNode,
   altText: string,
   text: string,
   count: number
 }) => {
+  const isSidebarOpen = useAppSelector(selectIsSidebarOpen)
   return (
-    <div className="w-full flex gap-4 items-center text-sm">
-      <div className="">
-        <Image src={icon} className="w-6 h-6"  alt={altText}/>
-      </div>
-      <p className="text-gray-800 w-full">{text}</p>
-      <p className="text-gray-500">{count}</p>
+    <div className={`w-full flex gap-4 items-center text-sm ${isSidebarOpen ? "justify-between":"justify-center"}`}>
+      <button type="button" className="" data-tooltip-id={text}>
+        {Icon}
+      </button>
+      <Tooltip id={text} content={text} place='right' />
+      <p className={`text-gray-800 line-clamp-1 w-full ${isSidebarOpen ? "inline":"hidden"}`}>{text}</p>
+      <p className={`text-gray-500 ${isSidebarOpen ? "inline":"hidden"}`}>{count}</p>
     </div>
   )
 }

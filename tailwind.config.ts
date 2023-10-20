@@ -10,9 +10,10 @@ const config: Config = {
     colors: {
       white: "#FFFFFF",
       "blue": {
-        DEFAULT: "#5B0AE1",
+        DEFAULT: "rgb(var(--bg-blue))",
         "300": "#6B63C4",
-        "500":"#584FBD"
+        "500":"#584FBD",
+        "highlight": "#665BE3"
 
       },
       "gray": {
