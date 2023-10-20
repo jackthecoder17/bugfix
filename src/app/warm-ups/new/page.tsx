@@ -1,7 +1,8 @@
+"use client"
 import React from 'react'
-import TextInput from '../../components/TextInput'
+import TextInput from '@/app/components/TextInput'
 
-const CreateWarmupDetails = () => {
+const CreateWarmup = () => {
   return (
     <section className="w-full h-full overflow-auto flex bg-gray-150 px-5 py-10">
       <div className="w-full h-fit flex flex-col items-center just50y-center gap-5 ">
@@ -32,4 +33,4 @@ const CreateWarmupDetails = () => {
   )
 }
 
-export default CreateWarmupDetails
+export default CreateWarmup

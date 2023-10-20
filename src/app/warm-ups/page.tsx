@@ -1,36 +1,46 @@
 "use client"
-import React from 'react'
+import { useRouter } from "next/navigation"
+import EmptyListPlaceholder from "../components/EmptyListPlaceholder"
+import { useState } from "react"
 import Image from "next/image"
-import { notFound, useParams } from 'next/navigation'
 import CheckGreen from "@/app/assets/icons/svg/check-green.svg"
 import CheckRed from "@/app/assets/icons/svg/check-red.svg"
 import NotFound from "@/app/assets/images/illustrations/page-not-found.svg"
 
-const Warmups = () => {
-  const params = useParams()
-  let warmups = [
-    {
-      _id: "wwlkwk",
-      no: "01",
-      name: "Neww1",
-      status: "draft",
-      day: 0,
-      spamEmail: 0,
-      sentEmail: 0
-    },
-    {
-      _id: "asdkfjasdf",
-      no: "02",
-      name: "warmup 2",
-      status: "Sent 15 Aug, 8:30PM",
-      day: 0,
-      spamEmail: 0,
-      sentEmail: 200
-    },
-  ]
+let sampleWarmups = [
+  {
+    _id: "wwlkwk",
+    no: "01",
+    name: "Neww1",
+    status: "draft",
+    day: 0,
+    spamEmail: 0,
+    sentEmail: 0
+  },
+  {
+    _id: "asdkfjasdf",
+    no: "02",
+    name: "warmup 2",
+    status: "Sent 15 Aug, 8:30PM",
+    day: 0,
+    spamEmail: 0,
+    sentEmail: 200
+  },
+]
 
-  // 
-  warmups =[]
+
+const WarmUp = () => {
+  const [warmups, setWarmups] = useState<typeof sampleWarmups>(sampleWarmups)
+  const router = useRouter()
+  function goToCreateWarmup(){
+    router.push("/warm-ups/new")
+  }
+
+  if (!warmups || warmups.length === 0){
+    return (
+      <EmptyListPlaceholder title="Everything you need to warm up your email" ctaLabel="Add Warm-Up" ctaAction={goToCreateWarmup}/>
+    )
+  }
 
   return (
     <section className='flex w-full h-full overflow-hidden'>
@@ -78,4 +88,4 @@ const Warmups = () => {
   )
 }
 
-export default Warmups
+export default WarmUp

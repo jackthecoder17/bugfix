@@ -8,6 +8,7 @@ import Link4 from "../../assets/icons/svg/server.svg"
 import Link5 from "../../assets/icons/svg/image 1.svg"
 import Link6 from "../../assets/icons/svg/settings.svg"
 import WarmupSidebar from './components/WarmupSidebar'
+import MailServersSidebar from './components/MailServersSidebar'
 import { usePathname } from 'next/navigation'
 
 interface Sidebar {
@@ -20,6 +21,10 @@ const sidebars: Sidebar[] = [
     title: "Warm-ups",
     component: <WarmupSidebar />
   },
+  {
+    title: "Mail Servers",
+    component: <MailServersSidebar />
+  },
 ]
 
 const Sidebar = () => {
@@ -27,33 +32,33 @@ const Sidebar = () => {
   let secSidebar: Sidebar | null = null
 
   // add more conditions for the sidebar of other pages
-  if (pathname.startsWith("/warm-up")){
+  if (pathname.startsWith("/warm-ups")){
     secSidebar = sidebars[0]
+  } else if (pathname.startsWith("/mail-servers")){
+    secSidebar = sidebars[1]
   }
 
   return (
     <section className='flex h-full'>
       { /* primary navigation */}
       <nav className="flex w-fit flex-col gap-2 justify-between bg-blue">
-        <ul className="flex flex-col  h-full gap-3 justify-start py-5 px-2">
+        <ul className="flex flex-col  h-full gap-5 md:gap-10 items-center justify-start py-5 px-2">
+          <Link href={"/"} className="shadow-md">
+            <Image src={Link5} alt="" className="w-8 h-8" />
+          </Link>
           <div className="h-full flex flex-col justify-start gap-5">
             <li className="cursor-pointer">
-              <Link href={"/"}>
-                <Image src={Link5} alt="" className="w-8 h-8" />
-              </Link>
-            </li>
-            <li className="cursor-pointer">
-              <Link href={"/warm-up"}>
+              <Link href={"/warm-ups"}>
                 <Image src={Link2} alt="" className="w-6 h-6" />
               </Link>
             </li>
             <li className="cursor-pointer">
-              <Link href={"/mail-service"}>
+              <Link href={"/mail-servers"}>
                 <Image src={Link4} alt="" className="w-5 h-5" />
               </Link>
             </li>
             <li className="cursor-pointer">
-              <Link href={"/email-list"}>
+              <Link href={"/email-lists"}>
                 <Image src={Link3} alt="" className="w-5 h-5" />
               </Link>
             </li>
