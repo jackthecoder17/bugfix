@@ -5,7 +5,7 @@ import { sampleMailServers } from "@/app/constants"
 const initialState: {
     mailServers: typeof sampleMailServers
 } = {
-        mailServers: []
+        mailServers: [...sampleMailServers]
     }
 
 const mailServersSlice = createSlice({

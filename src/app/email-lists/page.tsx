@@ -1,11 +1,20 @@
-import React from 'react'
+"use client"
+import Loader1 from '../components/Loader1'
+import { routes } from '../constants'
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from 'react'
+
 
 const EmailLists = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push(routes.REPLY_EMAILS)
+  }, [])
+
   return (
-    <section className='flex w-full h-full overflow-hidden'>
-      <div className="flex w-full h-full overflow-x-auto border-x-[0.5px] text-sm">
-        email lists
-      </div>
+    <section className="flex justify-center items-center p-5 bg-white h-full w-full overflow-auto">
+      <Loader1 />
     </section>
   )
 }

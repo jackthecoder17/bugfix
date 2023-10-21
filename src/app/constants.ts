@@ -1,10 +1,12 @@
 export const routes = {
-    MAIL_SERVERS: "/mail-servers",
-    NEW_MAIL_SERVER: "/mail-servers/new",
-    WARM_UPS: "/warm-ups",
-    NEW_WARM_UP: "/warm-ups/new",
-    EMAIL_LISTS: "/email-lists",
-    SETTINGS: "/settings"
+  MAIL_SERVERS: "/mail-servers",
+  NEW_MAIL_SERVER: "/mail-servers/new",
+  WARM_UPS: "/warm-ups",
+  NEW_WARM_UP: "/warm-ups/new",
+  EMAIL_LISTS: "/email-lists",
+  CLIENT_EMAILS: "/email-lists/client-emails",
+  REPLY_EMAILS: "/email-lists/reply-emails",
+  SETTINGS: "/settings",
 }
 
 

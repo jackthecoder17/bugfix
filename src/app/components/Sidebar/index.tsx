@@ -8,6 +8,7 @@ import Link5 from "../../assets/icons/svg/image 1.svg"
 import Link6 from "../../assets/icons/svg/settings.svg"
 import WarmupSidebar from './components/WarmupSidebar'
 import MailServersSidebar from './components/MailServersSidebar'
+import EmailListsSidebar from "./components/EmailListsSidebar"
 import { usePathname } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks'
 import { selectIsSidebarOpen } from '@/app/store/slices/sidebarSlice'
@@ -29,7 +30,7 @@ const sidebars: Sidebar[] = [
   },
   {
     title: "Email Lists",
-    component: MailServersSidebar 
+    component: EmailListsSidebar 
   },
 ]
 
