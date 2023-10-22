@@ -1,6 +1,6 @@
 "use client"
 import Loader1 from '../components/Loader1'
-import { routes } from '../constants'
+import { routes } from '@/app/constants'
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from 'react'
 

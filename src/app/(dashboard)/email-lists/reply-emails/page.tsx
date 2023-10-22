@@ -1,11 +1,11 @@
 "use client"
-import SearchNotFound from '@/app/components/SearchNotFound'
-import { useAppSelector } from '@/app/store/hooks'
-import { selectReplyEmails } from '@/app/store/slices/emailListsSlice'
+import SearchNotFound from '@/app/(dashboard)/components/SearchNotFound'
+import { useAppSelector } from '@/app/(dashboard)/store/hooks'
+import { selectReplyEmails } from '@/app/(dashboard)/store/slices/emailListsSlice'
 import React from 'react'
 import EmailList from '../components/EmailList'
 
-export default function ReplyEmails(){
+export default function ReplyEmails() {
   const replyEmails = useAppSelector(selectReplyEmails)
   const searchTerm = "search"
   return (
@@ -15,12 +15,12 @@ export default function ReplyEmails(){
         searchTerm ? (
           replyEmails.length === 0 ? (
             <SearchNotFound message={<>We couldn't find Email that match your search. Please try using <br />different, fewer filters or typing another search request.</>} title={<>Result Not Found</>} />
-          ):(
-              <EmailList results={replyEmails}/>
-            )
-        ):(
-            <EmailList results={replyEmails}/>
+          ) : (
+            <EmailList results={replyEmails} />
           )
+        ) : (
+          <EmailList results={replyEmails} />
+        )
       }
     </>
   )

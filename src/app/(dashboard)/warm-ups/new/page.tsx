@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import TextInput from '@/app/components/TextInput'
+import TextInput from '@/app/(dashboard)/components/TextInput'
 
 const CreateWarmup = () => {
   return (
@@ -12,7 +12,7 @@ const CreateWarmup = () => {
           </div>
           <div className="flex gap-6 h-full">
             <div className="w-full flex flex-col gap-5">
-              <TextInput label='Select Mail Server Associated with this Warmup' placeholder='Select A "Mail Server" List'  />
+              <TextInput label='Select Mail Server Associated with this Warmup' placeholder='Select A "Mail Server" List' />
               <TextInput label='Select Client Email Associated with this Warmup' placeholder='Select A Client Email List' />
               <TextInput label="Warm-up Name" placeholder="Enter your warm-up name" />
               <TextInput label="Warm-up Name" placeholder="Enter your warm-up name" />
@@ -21,7 +21,7 @@ const CreateWarmup = () => {
             </div>
 
             <div className="w-full flex flex-col gap-5">
-              <TextInput label='Select Mail Server Associated with this Warmup' placeholder='Select A "Mail Server" List'  />
+              <TextInput label='Select Mail Server Associated with this Warmup' placeholder='Select A "Mail Server" List' />
               <TextInput label="Warm-up Name" placeholder="Enter your warm-up name" />
               <TextInput label="Warm-up Name" placeholder="Enter your warm-up name" />
               <TextInput label="Warm-up Name" placeholder="Enter your warm-up name" />

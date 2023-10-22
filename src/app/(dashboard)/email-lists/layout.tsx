@@ -6,7 +6,7 @@ import Search from '../components/Header/Search'
 import { IconContext } from 'react-icons'
 import { FaPlus } from 'react-icons/fa'
 import { usePathname } from 'next/navigation'
-import { routes } from '../constants'
+import { routes } from '@/app/constants'
 import DragNDrop from './components/DragNDrop'
 
 const buttons =[

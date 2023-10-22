@@ -1,17 +1,17 @@
 "use client"
 import React from 'react'
 import Link from "next/link"
-import WarmupIcon from "../../assets/icons/svg/cast.svg"
-import Link3 from "../../assets/icons/svg/Gmail.svg"
-import Link4 from "../../assets/icons/svg/server.svg"
-import Link5 from "../../assets/icons/svg/image 1.svg"
-import Link6 from "../../assets/icons/svg/settings.svg"
+import WarmupIcon from "@/app/assets/icons/svg/cast.svg"
+import Link3 from "@/app/assets/icons/svg/Gmail.svg"
+import Link4 from "@/app/assets/icons/svg/server.svg"
+import Link5 from "@/app/assets/icons/svg/image 1.svg"
+import Link6 from "@/app/assets/icons/svg/settings.svg"
 import WarmupSidebar from './components/WarmupSidebar'
 import MailServersSidebar from './components/MailServersSidebar'
 import EmailListsSidebar from "./components/EmailListsSidebar"
 import { usePathname } from 'next/navigation'
-import { useAppDispatch, useAppSelector } from '@/app/store/hooks'
-import { selectIsSidebarOpen } from '@/app/store/slices/sidebarSlice'
+import { useAppDispatch, useAppSelector } from '@/app/(dashboard)/store/hooks'
+import { selectIsSidebarOpen } from '@/app/(dashboard)/store/slices/sidebarSlice'
 import { Tooltip } from 'react-tooltip'
 
 interface Sidebar {
@@ -22,7 +22,7 @@ interface Sidebar {
 const sidebars: Sidebar[] = [
   {
     title: "Warm-ups",
-    component: WarmupSidebar 
+    component: WarmupSidebar
   },
   {
     title: "Mail Servers",
@@ -30,7 +30,7 @@ const sidebars: Sidebar[] = [
   },
   {
     title: "Email Lists",
-    component: EmailListsSidebar 
+    component: EmailListsSidebar
   },
 ]
 
@@ -42,15 +42,15 @@ const Sidebar = () => {
 
   const warmUpsRoute = "/warm-ups"
   const mailServersRoute = "/mail-servers"
-  const emailListsRoute =  "/email-lists"
+  const emailListsRoute = "/email-lists"
   const settingsRoute = "/settings"
 
   // add more conditions for the sidebar of other pages
-  if (pathname.startsWith(warmUpsRoute)){
+  if (pathname.startsWith(warmUpsRoute)) {
     SecSidebar = sidebars[0]
-  } else if (pathname.startsWith("/mail-servers")){
+  } else if (pathname.startsWith("/mail-servers")) {
     SecSidebar = sidebars[1]
-  } else if (pathname.startsWith("/email-lists")){
+  } else if (pathname.startsWith("/email-lists")) {
     SecSidebar = sidebars[2]
   }
 
@@ -66,43 +66,43 @@ const Sidebar = () => {
               <Link5 />
             }
           </Link>
-          { /* nav items */ }
+          { /* nav items */}
           <div className="h-full flex flex-col justify-start gap-2 items-center">
-            <li className={`cursor-pointer p-2 transition duration-300 ${pathname.startsWith(warmUpsRoute) ? `bg-blue-highlight`:""}`}>
+            <li className={`cursor-pointer p-2 transition duration-300 ${pathname.startsWith(warmUpsRoute) ? `bg-blue-highlight` : ""}`}>
               <Link href={warmUpsRoute} data-tooltip-id={warmUpsRoute} >
                 <WarmupIcon />
               </Link >
               <Tooltip id={warmUpsRoute} content={"Warmups"} place='right' />
             </li>
-            <li className={`cursor-pointer p-2 transition duration-300 ${pathname.startsWith(mailServersRoute) ? `bg-blue-highlight`:""}`}>
+            <li className={`cursor-pointer p-2 transition duration-300 ${pathname.startsWith(mailServersRoute) ? `bg-blue-highlight` : ""}`}>
               <Link href={mailServersRoute} data-tooltip-id={mailServersRoute}>
                 <Link4 />
               </Link>
               <Tooltip id={mailServersRoute} content={"Mail Servers"} place='right' />
             </li>
-            <li className={`cursor-pointer p-2 transition duration-300 ${pathname.startsWith(emailListsRoute) ? `bg-blue-highlight`:""}`}>
+            <li className={`cursor-pointer p-2 transition duration-300 ${pathname.startsWith(emailListsRoute) ? `bg-blue-highlight` : ""}`}>
               <Link href={emailListsRoute} data-tooltip-id={emailListsRoute}>
                 <Link3 />
               </Link>
               <Tooltip id={emailListsRoute} content={"Email Lists"} place='right' />
             </li>
           </div>
-          <li className={`cursor-pointer justify-self-end transition duration-300 p-2 ${pathname.startsWith(settingsRoute) ? `bg-blue-highlight`:""}`}>
+          <li className={`cursor-pointer justify-self-end transition duration-300 p-2 ${pathname.startsWith(settingsRoute) ? `bg-blue-highlight` : ""}`}>
             <Link href={settingsRoute} data-tooltip-id={settingsRoute}>
               <Link6 />
             </Link>
             <Tooltip id={settingsRoute} content={"Settings"} place='right' />
           </li>
-        </ul> 
+        </ul>
       </nav>
 
       { /* secondary navigation */}
       {
         SecSidebar && (
-          <section className={`flex flex-col items-center gap-5 transition-all duration-300 ${isSidebarOpen ? "w-[15rem] p-5":"w-[4rem] px-3 py-5"}`}>
-            <h2 className={`text-start w-full text-gray-800 text-xl line-clamp-1 font-bold ${ isSidebarOpen ? "opacity-100":"opacity-0" }`}>{ SecSidebar.title }</h2>
+          <section className={`flex flex-col items-center gap-5 transition-all duration-300 ${isSidebarOpen ? "w-[15rem] p-5" : "w-[4rem] px-3 py-5"}`}>
+            <h2 className={`text-start w-full text-gray-800 text-xl line-clamp-1 font-bold ${isSidebarOpen ? "opacity-100" : "opacity-0"}`}>{SecSidebar.title}</h2>
             <div className="flex h-full w-full justify-center">
-              <SecSidebar.component  />
+              <SecSidebar.component />
             </div>
           </section>
         )

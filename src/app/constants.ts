@@ -7,6 +7,8 @@ export const routes = {
   CLIENT_EMAILS: "/email-lists/client-emails",
   REPLY_EMAILS: "/email-lists/reply-emails",
   SETTINGS: "/settings",
+  SIGNUP: "/signup",
+  LOGIN: "/login"
 }
 
 

@@ -6,8 +6,8 @@ import { FaPlus } from 'react-icons/fa'
 import SecNavItem from './SecNavItem'
 import Disk from "@/app/assets/icons/svg/Vector.svg"
 import Trash from "@/app/assets/icons/svg/Vector-1.svg"
-import { useAppSelector } from '@/app/store/hooks'
-import { selectIsSidebarOpen } from '@/app/store/slices/sidebarSlice'
+import { useAppSelector } from '@/app/(dashboard)/store/hooks'
+import { selectIsSidebarOpen } from '@/app/(dashboard)/store/slices/sidebarSlice'
 import { Tooltip } from 'react-tooltip'
 
 const WarmupSidebar = () => {
@@ -20,7 +20,7 @@ const WarmupSidebar = () => {
         <IconContext.Provider value={{ color: "" }}>
           <FaPlus />
         </IconContext.Provider>
-        <span className={`${isSidebarOpen ? "inline":"hidden"}`} >{buttonText}</span>
+        <span className={`${isSidebarOpen ? "inline" : "hidden"}`} >{buttonText}</span>
         <Tooltip id={buttonText} place="top" content={buttonText} />
       </Link>
 

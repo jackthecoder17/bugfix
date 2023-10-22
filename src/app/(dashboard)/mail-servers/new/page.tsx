@@ -1,8 +1,8 @@
 "use client"
 import React from 'react'
-import TextInput from '@/app/components/TextInput'
+import TextInput from '@/app/(dashboard)/components/TextInput'
 
-export default function CreateMailServer(){
+export default function CreateMailServer() {
   return (
     <section className="w-full h-full overflow-auto flex bg-gray-150 px-5 py-10">
       <div className="w-full h-fit flex flex-col items-center just50y-center gap-5 ">
@@ -12,14 +12,14 @@ export default function CreateMailServer(){
           </div>
           <div className="flex flex-col gap-12 h-full w-full">
             <div className="w-full flex flex-col md:flex-row gap-5">
-              <TextInput label='Name of email service' placeholder='Enter your warm-up name'  />
+              <TextInput label='Name of email service' placeholder='Enter your warm-up name' />
               <TextInput label='UID' placeholder='Enter your warm-up name' />
             </div>
             <div className="flex flex-col gap-5">
               <h3 className="text-gray-800 text-xl">SMTP (sending emails)</h3>
               <div className="w-full flex flex-col md:flex-row gap-5">
-                <TextInput label='Host' placeholder='Enter your warm-up name'  />
-                <TextInput label='Port' placeholder='Enter your warm-up name'  />
+                <TextInput label='Host' placeholder='Enter your warm-up name' />
+                <TextInput label='Port' placeholder='Enter your warm-up name' />
               </div>
               <div className="w-full flex flex-col md:flex-row gap-5">
                 <TextInput label="From SMTP Email" placeholder="Enter your warm-up name" />
@@ -33,8 +33,8 @@ export default function CreateMailServer(){
             <div className="flex flex-col gap-5">
               <h3 className="text-gray-800 text-xl">IMAP (receiving emails)</h3>
               <div className="w-full flex flex-col md:flex-row gap-5">
-                <TextInput label='Host' placeholder='Enter your warm-up name'  />
-                <TextInput label='Port' placeholder='Enter your warm-up name'  />
+                <TextInput label='Host' placeholder='Enter your warm-up name' />
+                <TextInput label='Port' placeholder='Enter your warm-up name' />
               </div>
               <div className="w-full flex flex-col md:flex-row gap-5">
                 <TextInput label="From IMAP Email" placeholder="Enter your warm-up name" />

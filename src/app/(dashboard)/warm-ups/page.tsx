@@ -7,7 +7,7 @@ import CheckRed from "@/app/assets/icons/svg/check-red.svg"
 import NotFound from "@/app/assets/images/illustrations/page-not-found.svg"
 import { useAppSelector } from "../store/hooks"
 import { selectWarmups } from "../store/slices/warmupsSlice"
-import { routes } from "../constants"
+import { routes } from "@/app/constants"
 
 const WarmUp = () => {
   const warmups = useAppSelector(selectWarmups)
