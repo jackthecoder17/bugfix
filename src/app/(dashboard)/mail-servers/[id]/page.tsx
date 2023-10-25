@@ -1,8 +1,39 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import TextInput from '@/app/(dashboard)/components/TextInput'
+import SelectInput from '../../components/SelectInput'
+
+const securityOptions = [
+  { text: "SSL", value: "ssl" },
+  { text: "TLS", value: "tls" },
+  { text: "Unsecure", value: "unsecure" },
+]
+
+const initialMailServerData = {
+  name: "",
+  imapDetails: {
+    hostname: "",
+    port: "",
+    email: "",
+    password: "",
+    security:""
+  },
+  smtpDetails: {
+    hostname: "",
+    port: "",
+    email: "",
+    password: "",
+    security:""
+  }
+}
 
 export default function CreateMailServer() {
+  const [formState, setFormState] = useState(initialMailServerData)
+
+  function handleOnChange(update: { [key: string]: string }){
+    setFormState(prev => ({ ...prev, ...update }))
+  }
+
   return (
     <section className="w-full h-full overflow-auto flex bg-gray-150 px-5 py-10">
       <div className="w-full h-fit flex flex-col items-center just50y-center gap-5 ">
@@ -12,8 +43,7 @@ export default function CreateMailServer() {
           </div>
           <div className="flex flex-col gap-12 h-full w-full">
             <div className="w-full flex flex-col md:flex-row gap-5">
-              <TextInput label='Name of email service' placeholder='Enter your warm-up name' />
-              <TextInput label='UID' placeholder='Enter your warm-up name' />
+              <TextInput label='Name of email service' placeholder='Enter your warm-up name' value={formState.name} onChange={(e) => handleOnChange({ name: e.target.value }) } />
             </div>
             <div className="flex flex-col gap-5">
               <h3 className="text-gray-800 text-xl">SMTP (sending emails)</h3>
@@ -38,7 +68,7 @@ export default function CreateMailServer() {
               </div>
               <div className="w-full flex flex-col md:flex-row gap-5">
                 <TextInput label="From IMAP Email" placeholder="Enter your warm-up name" />
-                <TextInput label="SMTP User" placeholder="Enter your warm-up name" />
+                <SelectInput label="Security" placeholder="Enter your warm-up name" options={securityOptions} value={formState.imapDetails.security} onChange={(val: string) => handleOnChange({ imapDetails: { ...formState.imapDetails, security: val } })}  />
               </div>
               <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-5">
                 <TextInput label="IMAP Password" placeholder="Enter your warm-up name" />
