@@ -8,7 +8,7 @@ import { BsX } from 'react-icons/bs'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { closeServerForm, getSelectedMailServer, getServerFormMode } from '../../store/slices/mailServersSlice'
 import { mode } from '@/app/constants'
-import { useVerifyMailServerMutation } from '../../store/api/apiSlice'
+import { useAddMailServerMutation, useUpdateMailServerMutation, useVerifyMailServerMutation } from '../../store/api/apiSlice'
 import { useUserContext } from '../../contexts/UserProvider'
 import { useGlobalToastContext } from '@/app/contexts/GlobalToastProvider'
 import { validateSMTP, validateInput } from '@/app/helpers'
@@ -43,6 +43,8 @@ export default function MailServerForm() {
   const [formState, setFormState] = useState<MailServer | NewMailServer>(initialMailServerData)
   const [verifySMTP, { isLoading: isVerifySMTPLoading, isError: isVerifySMTPError }] = useVerifyMailServerMutation()
   const [verifyIMAP, { isLoading: isVerifyIMAPLoading, isError: isVerifyIMAPError }] = useVerifyMailServerMutation()
+  const [addMailServer, { isLoading: isAddMailServerLoading }] = useAddMailServerMutation()
+  const [updateMailServer, { isLoading: isUpdateMailServerLoading }] = useUpdateMailServerMutation()
   const userData = useUserContext()
   const token = userData.token as string
   const {showSuccessToast, showErrorToast} = useGlobalToastContext()
@@ -148,7 +150,7 @@ export default function MailServerForm() {
     setFormState(prev => ({ ...prev, ...update }))
   }
 
-  function handleFormSubmit(e: MouseEvent<HTMLButtonElement>){
+  async function handleFormSubmit(e: MouseEvent<HTMLButtonElement>){
     e.preventDefault()
     // validate  mail server name
     if (validateInput({ value: formState.name, errRef: nameRef, errorText: "Mail Server name is required"}) === false ){
@@ -159,6 +161,32 @@ export default function MailServerForm() {
       return 
     }
 
+    try{
+      if (currentMode === mode.NEW){
+        const resp = await addMailServer({ token, name: formState.name, imapDetails: formState.imapDetails, smtpDetails: formState.smtpDetails })
+        console.log("mail server creation: ", resp)
+        showSuccessToast("Mail Server Created!")
+        setFormState(initialMailServerData)
+      }else{
+        const resp = await updateMailServer({ token, name: formState.name, imapDetails: formState.imapDetails, smtpDetails: formState.smtpDetails, mailServerId: server?._id as string })
+        console.log("mail server update: ", resp)
+        showSuccessToast("Mail Server Updated!")
+      }
+    }catch(err: any){
+      if (currentMode === mode.NEW){
+        if(err.data){
+          showErrorToast(err.data.description)
+        }else {
+          showErrorToast("Unable to create new mail server")
+        }
+      }else{
+        if(err.data){
+          showErrorToast(err.data.description)
+        }else {
+          showErrorToast("Unable to create edit mail server")
+        }
+      }
+    }
   }
 
   return (
@@ -220,7 +248,13 @@ export default function MailServerForm() {
                 ):("Verify") }
               </button>
             </div>
-            <button disabled={isSubmitDisabled} onClick={handleFormSubmit} type="button" className="px-5 md:px-10 py-2 bg-blue rounded-md text-white w-fit disabled:opacity-50 disabled:cursor-not-allowed">Continue</button>
+            <button disabled={isSubmitDisabled} onClick={handleFormSubmit} type="button" className="px-5 md:px-10 py-2 bg-blue rounded-md text-white w-fit disabled:opacity-50 disabled:cursor-not-allowed">
+              { (isAddMailServerLoading || isUpdateMailServerLoading) ? (
+                <p className="scale-50 flex justify-center items-center relative h-full w-full">
+                  <Loader2 />
+                </p>
+              ):("Continue") }
+            </button>
           </div>
         </form>
       </div>

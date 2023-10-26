@@ -60,7 +60,7 @@ const apiSlice = createApi({
                 }
             }
         }),
-        addMailServer: builder.mutation<{}, { token: string, name: string, imapDetails: ServerConfig, smtpDetails: ServerConfig } >({
+        addMailServer: builder.mutation<{ message: string, description: string, mailServer: MailServer }, { token: string, name: string, imapDetails: ServerConfig, smtpDetails: ServerConfig } >({
             query: ({ name, imapDetails, smtpDetails, token }) => {
                 return {
                     url: `/mailservers`,
@@ -72,7 +72,7 @@ const apiSlice = createApi({
                 }
             }
         }),
-        updateMailServer: builder.mutation<{}, { mailServerId: string, token: string, name: string, imapDetails: ServerConfig, smtpDetails: ServerConfig } >({
+        updateMailServer: builder.mutation<{ message: string, description: string }, { mailServerId: string, token: string, name: string, imapDetails: ServerConfig, smtpDetails: ServerConfig } >({
             query: ({ mailServerId,  name, imapDetails, smtpDetails, token }) => {
                 return {
                     url: `/mailservers/${mailServerId}`,
