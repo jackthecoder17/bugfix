@@ -1,6 +1,5 @@
 "use client"
 import { BsX as XMark, BsArrowLeftShort as ArrowLeft } from "react-icons/bs"
-import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import EmptyListPlaceholder from "../components/EmptyListPlaceholder"
@@ -11,7 +10,6 @@ import { useGetMailServersQuery } from "../store/api/apiSlice"
 import Loader1 from "../components/Loader1"
 import { MailServer } from "@/app/types"
 import { IconContext } from "react-icons"
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 import { useAppDispatch, useAppSelector } from "../store/hooks"
 import { selectIsSidebarOpen, toggleSidebar } from "../store/slices/sidebarSlice"
 import Search from "../components/Header/Search"
@@ -19,16 +17,19 @@ import ToolbarButton from "../components/Header/ToolbarButton"
 import Book from "@/app/assets/icons/svg/book.svg"
 import PlayOutline from "@/app/assets/icons/svg/play-outline.svg"
 import MailServersList from "./components/MailServersList"
+import MailServerForm from "./components/MailServerForm"
+import { getIsOpenServerForm } from "../store/slices/mailServersSlice"
 
 export default function MailServersWrapper(){
   const [isShowSearch] = useState(true)
   const dispatch = useAppDispatch()
   const isSidebarOpen = useAppSelector(selectIsSidebarOpen)
+  const isOpenServerForm = useAppSelector(getIsOpenServerForm)
 
   return (
     <section className="flex flex-col gap-2 w-full h-full relative bg-white">
       <section className="bg-gray-100 flex gap-2 w-full justify-between items-center pr-5 md:pr-10  py-3 relative">
-        <button type="button" className="rounded-full bg-gray-200 transition duration-200 -translate-x-1/2 w-7 h-7 flex justify-center items-center" onClick={() => dispatch(toggleSidebar())}>
+        <button type="button" className="z-30 rounded-full bg-gray-200 transition duration-200 -translate-x-1/2 w-7 h-7 flex justify-center items-center" onClick={() => dispatch(toggleSidebar())}>
           <IconContext.Provider value={{ size: "2em", className: `cursor-pointer p-1 ${isSidebarOpen ? "" : "rotate-180"}`, color: "#2F2F2F" }}>
             <ArrowLeft />
           </IconContext.Provider>
@@ -56,6 +57,9 @@ export default function MailServersWrapper(){
         }
       </section>
       <MailServers />
+      {
+        isOpenServerForm && <MailServerForm  />
+      }
     </section>
   )
 }

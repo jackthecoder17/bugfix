@@ -1,10 +1,13 @@
-import { routes } from "@/app/constants"
+import { mode, routes } from "@/app/constants"
 import { MailServer } from "@/app/types"
 import Link from "next/link"
 import { useState } from "react"
 import { IconContext } from "react-icons"
 import { BsX as XMark } from "react-icons/bs"
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
+import { getSelectedMailServer, openServerForm } from "../../store/slices/mailServersSlice"
+import { useAppSelector, useAppDispatch } from "../../store/hooks"
+import { setSelectedMailServer } from "../../store/slices/mailServersSlice"
 
 export default function MailServersList({results, next, prev, lastItemCount, firstItemCount, totalResults, hasNext, hasPrev}: {
   results:  MailServer[],
@@ -16,40 +19,20 @@ export default function MailServersList({results, next, prev, lastItemCount, fir
   hasNext: boolean,
   hasPrev: boolean
 }){
-  const  [mailServer, setMailServer] = useState<null | MailServer>(null)
+  const mailServer = useAppSelector(getSelectedMailServer)
+  const dispatch = useAppDispatch()
+
   const [isOpen, setIsOpen] = useState(false)
 
   function handleMailServerSelect(server: MailServer){
-    setMailServer(server)
+    dispatch(setSelectedMailServer(server))
     setIsOpen(true)
   }
-
-  //
-
-  // <div key={server._id} role="button" className={`w-full text-gray-500 border-2 border-gray-100 rounded-md hover:bg-gray-100 px-3 py-2 ${ server._id === mailServer?._id ? "bg-gray-100":"bg-[#fafafa]" }`} onClick={() => handleMailServerSelect(server)}>
-  //   <div>
-  //     <div className="flex gap-2 items-center flex-col lg:flex-row">
-  //       <input type="checkbox" className="scale-105 rounded-md" />
-  //       <h3 className="line-clamp-1 w-full text-xl text-gray-800">{itemNumber }.  { server.name }</h3>
-  //     </div>
-  //     <div className="flex gap-2 items-center flex-col lg:flex-row">
-  //       <p className="text-gray-500">added on: { (new Date(server.addedOn).toDateString()).toString() }</p>
-  //     </div>
-  //   </div>
-  // </div>
 
   return (
     <div className="flex gap-2 w-full h-full relative">
       <div className="relative w-full flex flex-col gap-3">
         <div className="flex flex-col h-full w-full">
-          {
-            // <div className="flex">
-            //   <label className="flex items-center gap-2">
-            //     <input type="checkbox" className="scale-105 rounded-md" />
-            //     <p>Select all</p>
-            //   </label>
-            // </div>
-          }
           <div className="flex flex-col gap-2 w-full h-fit ">
             {
               results.map((server, index) => { 
@@ -90,7 +73,7 @@ export default function MailServersList({results, next, prev, lastItemCount, fir
                 <div className="w-full px-3 py-2">
                   <div className="flex justify-end" >
                     <button type="button" onClick={() => setIsOpen(false)}>
-                      <IconContext.Provider value={{ size: "2rem", className: "hover:bg-[#ddd] rounded-full transition duration-200 p-1" }}>
+                      <IconContext.Provider value={{ size: "2em", className: "hover:bg-[#ddd] rounded-full transition duration-200 p-1" }}>
                         <XMark />
                       </IconContext.Provider>
                     </button>
@@ -101,7 +84,10 @@ export default function MailServersList({results, next, prev, lastItemCount, fir
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-center md:justify-between text-gray-placeholder gap-2 text-sm">
                     <p>lastModified: { new Date(mailServer.lastModified).toDateString() }</p>
-                    <Link href={`${routes.MAIL_SERVERS}/${mailServer._id}`} className="px-3 py-1 bg-blue-500 text-white rounded-md">edit</Link>
+                    <button type="button" onClick={() => {
+                      dispatch(setSelectedMailServer(mailServer))
+                      dispatch(openServerForm(mode.EDIT))
+                    }} className="px-3 py-1 bg-blue-500 text-white rounded-md">edit</button>
                   </div>
                 </div>
               </div>

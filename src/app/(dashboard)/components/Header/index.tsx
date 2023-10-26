@@ -14,41 +14,40 @@ import Book from "@/app/assets/icons/svg/book.svg"
 import Search from './Search'
 import ToolbarButton from './ToolbarButton'
 import { routes } from '@/app/constants'
-import { selectMailServers } from '@/app/(dashboard)/store/slices/mailServersSlice'
 import { selectWarmups } from '@/app/(dashboard)/store/slices/warmupsSlice'
 
 const Header = () => {
-  const dispatch = useAppDispatch()
-  const isSidebarOpen = useAppSelector(selectIsSidebarOpen)
-  const warmups = useAppSelector(selectWarmups)
-  const mailServers = useAppSelector(selectMailServers)
-  const pathname = usePathname()
-  let isShowSecondary = true
-  if (pathname === "/" || pathname === routes.NEW_WARM_UP) {
-    isShowSecondary = false
-  }
-
-  let isShowSearch: boolean = false
-  const onWarmupsListRegex = new RegExp(`^${routes.WARM_UPS}/?$`)
-  const isOnWarmupsList = onWarmupsListRegex.test(pathname)
-  const isNonEmptyWarmupsList = warmups?.length > 0
-
-  const onMailServersListRegex = new RegExp(`^${routes.MAIL_SERVERS}/?$`)
-  const isOnMailServersList = onMailServersListRegex.test(pathname)
-  const isNonEmptyMailServersList = mailServers?.length > 0
+  // const dispatch = useAppDispatch()
+  // const isSidebarOpen = useAppSelector(selectIsSidebarOpen)
+  // const warmups = useAppSelector(selectWarmups)
+  // // const mailServers = useAppSelector(selectMailServers)
+  // const pathname = usePathname()
+  // let isShowSecondary = true
+  // if (pathname === "/" || pathname === routes.NEW_WARM_UP) {
+  //   isShowSecondary = false
+  // }
+  //
+  // let isShowSearch: boolean = false
+  // const onWarmupsListRegex = new RegExp(`^${routes.WARM_UPS}/?$`)
+  // const isOnWarmupsList = onWarmupsListRegex.test(pathname)
+  // const isNonEmptyWarmupsList = warmups?.length > 0
+  //
+  // const onMailServersListRegex = new RegExp(`^${routes.MAIL_SERVERS}/?$`)
+  // const isOnMailServersList = onMailServersListRegex.test(pathname)
+  // const isNonEmptyMailServersList = mailServers?.length > 0
 
   // show the search ber instead, when on warmups or mailservers page and there's actual warmups or mailservers that are displayed
-  if ((isOnWarmupsList && isNonEmptyWarmupsList) || (isOnMailServersList && isNonEmptyMailServersList)) {
-    isShowSearch = true
-  }
+  // if ((isOnWarmupsList && isNonEmptyWarmupsList) || (isOnMailServersList && isNonEmptyMailServersList)) {
+  //   isShowSearch = true
+  // }
 
-  function toggleSidebar() {
-    if (isSidebarOpen) {
-      dispatch(closeSidebar())
-    } else {
-      dispatch(openSidebar())
-    }
-  }
+  // function toggleSidebar() {
+  //   if (isSidebarOpen) {
+  //     dispatch(closeSidebar())
+  //   } else {
+  //     dispatch(openSidebar())
+  //   }
+  // }
 
   return (
     <header className="w-full h-fit flex flex-col">

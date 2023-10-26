@@ -18,7 +18,6 @@ const AuthProtected = ({ children }: { children: React.ReactNode }) => {
         router.push(routes.HOME)
       }
     }else {
-      console.log("not authed!!!")
       if (session.status === SESSION_STATUS.UNAUTHENTICATED){
         router.push(routes.LOGIN)
       }
