@@ -69,7 +69,7 @@ export default function MailServersList({
   };
 
   return (
-    <div className="w-full">
+    <div className=" w-full">
       {isEditDragNDropOpen && (
         <section className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-50">
           <EditServerForm
@@ -78,7 +78,7 @@ export default function MailServersList({
           />
         </section>
       )}
-      <table className="overflow-auto border-collapse w-full">
+      <table className=" border-collapse w-full">
         <thead>
           <tr>
             <th className="px-4 py-2">
