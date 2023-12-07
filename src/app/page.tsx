@@ -12,8 +12,8 @@ export default function Home() {
   }, []);
 
   return (
-    <section className="flex justify-center items-center p-5 bg-white h-full w-full overflow-auto">
-      <Login />
+    <section className="flex items-center justify-center w-full h-full p-5 overflow-auto bg-white">
+      <Loader1 />
     </section>
   );
 }
